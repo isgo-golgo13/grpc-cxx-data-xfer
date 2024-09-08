@@ -1,0 +1,36 @@
+syntax = "proto3";
+
+package svckit;
+
+option go_package = "svckit-proto/proto;svckit";
+
+service DataTransfer {
+  rpc Send (SendRequest) returns (SendResponse);
+  rpc SendAll (SendAllRequest) returns (SendResponse);
+  rpc Receive (ReceiveRequest) returns (ReceiveResponse);
+  rpc ReceiveAll (ReceiveAllRequest) returns (ReceiveResponse);
+}
+
+message SendRequest {
+  bytes data = 1;
+}
+
+message SendAllRequest {
+  repeated bytes data = 1;
+}
+
+message SendResponse {
+  int64 bytes_transferred = 1;
+}
+
+message ReceiveRequest {
+  int64 size = 1;
+}
+
+message ReceiveAllRequest {
+  repeated int64 sizes = 1;
+}
+
+message ReceiveResponse {
+  bytes data = 1;
+}
