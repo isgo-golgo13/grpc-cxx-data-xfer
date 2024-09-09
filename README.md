@@ -33,7 +33,7 @@ This will generate the following files.
 - `service.grpc.pb.h`, `service.grpc.pb.cc`: gRPC service stubs.
 
 
-## Compile and Run
+## Compile with CMake
 
 ```shell
 mkdir build
