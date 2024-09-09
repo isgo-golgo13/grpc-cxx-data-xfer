@@ -1,0 +1,15 @@
+# Stage 1: Build the client binary
+FROM gcc:10.2 as builder
+WORKDIR /app
+COPY . .
+RUN apt-get update && apt-get install -y protobuf-compiler libprotobuf-dev libgrpc++-dev
+RUN make client
+
+# Stage 2: Run the client in a minimal environment
+FROM debian:buster-slim
+WORKDIR /home/appuser
+COPY --from=builder /app/client .
+RUN addgroup --system appgroup && adduser --system --ingroup appgroup appuser
+RUN chown -R appuser:appgroup /home/appuser
+USER appuser
+CMD ["./client"]
