@@ -2,13 +2,13 @@
 FROM gcc:10.2 as builder
 WORKDIR /app
 COPY . .
-RUN apt-get update && apt-get install -y protobuf-compiler libprotobuf-dev libgrpc++-dev
-RUN make client
+RUN apt-get update && apt-get install -y protobuf-compiler libprotobuf-dev libgrpc++-dev cmake
+RUN mkdir build && cd build && cmake .. && make client
 
 # Stage 2: Run the client in a minimal environment
 FROM debian:buster-slim
 WORKDIR /home/appuser
-COPY --from=builder /app/client .
+COPY --from=builder /app/build/client .
 RUN addgroup --system appgroup && adduser --system --ingroup appgroup appuser
 RUN chown -R appuser:appgroup /home/appuser
 USER appuser

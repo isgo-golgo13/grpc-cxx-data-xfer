@@ -35,7 +35,7 @@ private:
 int main() {
     DataTransferClient client(grpc::CreateChannel("localhost:50051", grpc::InsecureChannelCredentials()));
 
-    std::string data = "Hello, world!";
+    std::string data = "Client-000000000000000000000000001-Data";
     client.Send(data);
 
     return 0;

@@ -33,6 +33,16 @@ This will generate the following files.
 - `service.grpc.pb.h`, `service.grpc.pb.cc`: gRPC service stubs.
 
 
+## Compile and Run
+
+```shell
+mkdir build
+cmake -S . -B ./build
+cd build
+make
+```
+
+
 ## Compile the Docker Images
 
 ```shell
